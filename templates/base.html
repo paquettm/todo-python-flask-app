@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modern To-Do List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background: #f8fafc;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            margin: 0;
+        }
+        .container {
+            max-width: 420px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 32px 26px;
+        }
+        .title {
+            text-align: center;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #3b4157;
+            margin-bottom: 32px;
+        }
+        form {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px 12px;
+            font-size: 1.1rem;
+            border: 1.5px solid #c8d6e5;
+            border-radius: 7px;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #4f8ef7;
+            outline: none;
+        }
+        button[type="submit"] {
+            background: #4f8ef7;
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 7px;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 600;
+        }
+        button[type="submit"]:hover {
+            background: #366dc9;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #e3e6ee;
+        }
+        .todo-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .todo-title {
+            font-size: 1.07rem;
+            color: #343d57;
+            font-weight: 500;
+        }
+        .todo-completed {
+            color: #36c690;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .todo-actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            font-size: 0.98rem;
+            padding: 7px 12px;
+            border-radius: 5px;
+            color: #4f8ef7;
+            transition: background 0.15s, color 0.15s;
+            border: 1px solid #c8d6e5;
+        }
+        .todo-actions a:hover {
+            background: #e3e6ee;
+            color: #2c56a6;
+        }
+        .todo-id {
+            font-size: 0.93rem;
+            color: #999;
+        }
+        .empty-list {
+            text-align: center;
+            color: #bbb;
+            font-style: italic;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">To-Do List</div>
+        <form action="/add" method="post">
+            <input type="text" name="title" placeholder="Add a new task..." required>
+            <button type="submit">Add</button>
+        </form>
+        {% if todo_list %}
+        <ul>
+            {% for todo in todo_list %}
+            <li class="todo-item">
+                <div class="todo-info">
+                    <span class="todo-id">#{{ todo.id }}</span>
+                    <span class="todo-title">{{ todo.title }}</span>
+                    {% if todo.complete %}
+                        <span class="todo-completed">&#10003; Completed</span>
+                    {% endif %}
+                </div>
+                <div class="todo-actions">
+                    {% if not todo.complete %}
+                        <a href="/complete/{{todo.id}}">Complete</a>
+                    {% endif %}
+                    <a href="/delete/{{todo.id}}">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="empty-list">No tasks yet. Start by adding a new task above!</div>
+        {% endif %}
+    </div>
+</body>
+</html>
