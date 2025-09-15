@@ -73,14 +73,14 @@ Guide students through:
 - **Add an "Edit" Feature**  
   Implement a route and form that lets users edit the title of an existing task. This will require a new route and HTML form in the template.
 
-- **Persist Data to a File**  
+- **Persist Data to a File**  (Challege if "Edit" feature is complete)
   Modify the application so that tasks are saved to and loaded from a local text (or JSON) file, instead of only in memory. Use appropriate Python file I/O methods.  
   (Hint: Save the `todo_list` after any change, and load it at startup.)
 
-- **Improve the Template**  
+- **Improve the Template**  (Challenge if file storage is complete)
   In `base.html`, add conditional formatting so that completed tasks are visually different (e.g., grayed out, strikethrough).
 
-- **Reflection**  
+- **Reflection**  (To be completed in all cases)
   Write a brief reflection (150-200 words) answering:  
   - How does Flask handle HTTP methods and URLs?  
   - Why is it important to persist data in web applications?  
